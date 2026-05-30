@@ -116,6 +116,8 @@
     pinctrl-0 = <&spi1_default>;
     pinctrl-1 = <&spi1_sleep>;
     pinctrl-names = "default", "sleep";
+    
+    /* Explicitly define the pin as a property to bypass parser confusion */
     cs-gpios = <&gpio1 1 GPIO_ACTIVE_LOW>;
 
     nice_view: ls0xx@0 {
