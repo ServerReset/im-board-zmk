@@ -1,6 +1,6 @@
 if SHIELD_IM_BOARD
 
 config ZMK_KEYBOARD_NAME
-    default "Im Board"
+    default "I'm Board"
 
 endif
