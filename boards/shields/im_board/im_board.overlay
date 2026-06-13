@@ -1,5 +1,3 @@
-// im_board.overlay
-
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
@@ -101,18 +99,16 @@
     };
 };
 
-&soc {
-    nice_view_spi: spi@40004000 {
-        status = "okay";
-        pinctrl-0 = <&spi1_default>;
-        pinctrl-1 = <&spi1_sleep>;
-        pinctrl-names = "default", "sleep";
-        cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
-    };
+/* Target the SPI peripheral directly using the label */
+&spi1 {
+    status = "okay";
+    pinctrl-0 = <&spi1_default>;
+    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
 };
 
 &spi3 {
-    compatible = "nordic,nrf-spim";
     status = "okay";
     pinctrl-0 = <&spi3_default>;
     pinctrl-1 = <&spi3_sleep>;
