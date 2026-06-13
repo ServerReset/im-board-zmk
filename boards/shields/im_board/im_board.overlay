@@ -71,6 +71,18 @@
     };
 };
 
+&spi1 {
+    compatible = "nordic,nrf-spim";
+    status = "okay";
+    pinctrl-0 = <&spi1_default>;
+    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-names = "default", "sleep";
+    
+    nice_view_spi: &spi1 {
+        label = "nice_view_spi";
+    };
+};
+
 &pinctrl {
     spi1_default: spi1_default {
         group1 {
