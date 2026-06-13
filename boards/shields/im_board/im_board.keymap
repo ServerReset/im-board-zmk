@@ -25,17 +25,17 @@
 &kp GRAVE &kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y     &kp U  &kp I  &kp O  &kp P  &kp LBKT  &kp RBKT  &kp BSLH
 &kp TAB   &kp A  &kp S  &kp D  &kp F  &kp G  &kp H     &kp J  &kp K  &kp L  &kp SEMI &kp SQT            &kp RET
 &kp LSHFT &kp Z  &kp X  &kp C  &kp V  &kp B  &kp N     &kp M  &kp COMMA &kp DOT &kp FSLH &kp RSHFT &kp UP &td_caps_led
-&kp LCTRL &kp LGUI &kp LALT      &kp SPACE   &mo 1                                    &kp LEFT &kp DOWN &kp RIGHT
+&kp LCTRL &kp LGUI &kp LALT      &kp SPACE   &mo 1                           &kp LEFT &kp DOWN &kp RIGHT
             >;
         };
 
         mod_layer {
             bindings = <
-&trans &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6      &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12 &kp DEL
-&trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &trans &trans &trans   &trans &trans &trans &trans &trans &trans &trans
-&trans &bt BT_CLR &trans &trans &trans &trans &trans   &trans &trans &trans &trans &trans        &trans
-&trans &out OUT_USB &out OUT_BLE &trans &trans &trans &trans   &trans &trans &trans &trans &trans &sys_reset &trans
-&trans &trans &trans             &trans &trans                                             &trans &trans &trans
+&trans &kp F1       &kp F2       &kp F3       &kp F4 &kp F5 &kp F6          &kp F7 &kp F8          &kp F9          &kp F10         &kp F11         &kp F12    &kp DEL
+&trans &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &trans &trans &trans          &trans &trans          &trans          &trans          &trans          &trans     &trans
+&trans &bt BT_CLR   &trans       &trans       &trans &trans &rgb_ug RGB_TOG &trans &rgb_ug RGB_EFF &rgb_ug RGB_HUI &rgb_ug RGB_SAI &rgb_ug RGB_BRI &trans
+&trans &out OUT_USB &out OUT_BLE &trans       &trans &trans &trans          &trans &rgb_ug RGB_EFR &rgb_ug RGB_HUD &rgb_ug RGB_SAD &rgb_ug RGB_BRD &sys_reset &trans
+&trans &trans       &trans                    &trans &trans                                        &trans          &studio_unlock  &trans
             >;
         };
     };
