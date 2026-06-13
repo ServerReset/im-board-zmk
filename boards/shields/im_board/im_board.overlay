@@ -2,7 +2,7 @@
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 / {
-    /* Updated to 7 cells as required by ZMK Studio binding */
+    /* Required binding for ZMK Studio: must be 7 cells */
     key_physical_attrs: key-physical-attrs {
         compatible = "zmk,key-physical-attrs";
         #key-cells = <7>;
@@ -63,7 +63,6 @@
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
-        /* 7 cells: X, Y, Width, Height, Rotation_X, Rotation_Y, Rotation_Angle */
         keys = <&key_physical_attrs 0 0 100 100 0 0 0>, <&key_physical_attrs 100 0 100 100 0 0 0>, <&key_physical_attrs 200 0 100 100 0 0 0>, <&key_physical_attrs 300 0 100 100 0 0 0>, <&key_physical_attrs 400 0 100 100 0 0 0>, <&key_physical_attrs 500 0 100 100 0 0 0>, <&key_physical_attrs 600 0 100 100 0 0 0>, <&key_physical_attrs 700 0 100 100 0 0 0>, <&key_physical_attrs 800 0 100 100 0 0 0>, <&key_physical_attrs 900 0 100 100 0 0 0>, <&key_physical_attrs 1000 0 100 100 0 0 0>, <&key_physical_attrs 1100 0 100 100 0 0 0>, <&key_physical_attrs 1200 0 100 100 0 0 0>, <&key_physical_attrs 1300 0 100 100 0 0 0> \
              , <&key_physical_attrs 0 100 100 100 0 0 0>, <&key_physical_attrs 100 100 100 100 0 0 0>, <&key_physical_attrs 200 100 100 100 0 0 0>, <&key_physical_attrs 300 100 100 100 0 0 0>, <&key_physical_attrs 400 100 100 100 0 0 0>, <&key_physical_attrs 500 100 100 100 0 0 0>, <&key_physical_attrs 600 100 100 100 0 0 0>, <&key_physical_attrs 700 100 100 100 0 0 0>, <&key_physical_attrs 800 100 100 100 0 0 0>, <&key_physical_attrs 900 100 100 100 0 0 0>, <&key_physical_attrs 1000 100 100 100 0 0 0>, <&key_physical_attrs 1100 100 100 100 0 0 0>, <&key_physical_attrs 1200 100 100 100 0 0 0>, <&key_physical_attrs 1300 100 100 100 0 0 0> \
              , <&key_physical_attrs 0 200 100 100 0 0 0>, <&key_physical_attrs 100 200 100 100 0 0 0>, <&key_physical_attrs 200 200 100 100 0 0 0>, <&key_physical_attrs 300 200 100 100 0 0 0>, <&key_physical_attrs 400 200 100 100 0 0 0>, <&key_physical_attrs 500 200 100 100 0 0 0>, <&key_physical_attrs 600 200 100 100 0 0 0>, <&key_physical_attrs 700 200 100 100 0 0 0>, <&key_physical_attrs 800 200 100 100 0 0 0>, <&key_physical_attrs 900 200 100 100 0 0 0>, <&key_physical_attrs 1000 200 100 100 0 0 0>, <&key_physical_attrs 1100 200 100 100 0 0 0>, <&key_physical_attrs 1200 200 200 100 0 0 0> \
@@ -86,6 +85,7 @@
             low-power-enable;
         };
     };
+
     spi3_default: spi3_default {
         group1 {
             psels = <NRF_PSEL(SPIM_MOSI, 0, 31)>;
@@ -99,6 +99,7 @@
     };
 };
 
+/* Explicit label definition required for shield */
 nice_view_spi: &spi1 {
     status = "okay";
     pinctrl-0 = <&spi1_default>;
