@@ -1,7 +1,15 @@
+// im_board.overlay
+
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 / {
+    /* Required binding for ZMK Studio physical attributes */
+    key_physical_attrs: key-physical-attrs {
+        compatible = "zmk,key-physical-attrs";
+        #key-cells = <4>;
+    };
+
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
@@ -9,7 +17,6 @@
         zmk,physical-layout = &physical_layout0;
     };
 
-    /* Define a custom power node for the LED MOSFET to avoid clashing with the nice!nano's VCC node */
     led_power: led_power {
         compatible = "zmk,ext-power-generic";
         control-gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
@@ -18,9 +25,7 @@
 
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
         diode-direction = "col2row";
-
         row-gpios = <&gpio0 6  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&gpio0 8  (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
                     <&gpio0 17 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
@@ -55,83 +60,16 @@
         >;
     };
 
-key_physical_attrs: key_physical_attrs {
-    compatible = "zmk,key-physical-attrs";
-};
-physical_layout0: physical_layout_0 {
+    physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
-        keys  // <--- This block is required for ZMK Studio
-            = <&key_physical_attrs 0 0 100 100>
-            , <&key_physical_attrs 100 0 100 100>
-            , <&key_physical_attrs 200 0 100 100>
-            , <&key_physical_attrs 300 0 100 100>
-            , <&key_physical_attrs 400 0 100 100>
-            , <&key_physical_attrs 500 0 100 100>
-            , <&key_physical_attrs 600 0 100 100>
-            , <&key_physical_attrs 700 0 100 100>
-            , <&key_physical_attrs 800 0 100 100>
-            , <&key_physical_attrs 900 0 100 100>
-            , <&key_physical_attrs 1000 0 100 100>
-            , <&key_physical_attrs 1100 0 100 100>
-            , <&key_physical_attrs 1200 0 100 100>
-            , <&key_physical_attrs 1300 0 100 100>
-
-            , <&key_physical_attrs 0 100 100 100>
-            , <&key_physical_attrs 100 100 100 100>
-            , <&key_physical_attrs 200 100 100 100>
-            , <&key_physical_attrs 300 100 100 100>
-            , <&key_physical_attrs 400 100 100 100>
-            , <&key_physical_attrs 500 100 100 100>
-            , <&key_physical_attrs 600 100 100 100>
-            , <&key_physical_attrs 700 100 100 100>
-            , <&key_physical_attrs 800 100 100 100>
-            , <&key_physical_attrs 900 100 100 100>
-            , <&key_physical_attrs 1000 100 100 100>
-            , <&key_physical_attrs 1100 100 100 100>
-            , <&key_physical_attrs 1200 100 100 100>
-            , <&key_physical_attrs 1300 100 100 100>
-
-            , <&key_physical_attrs 0 200 100 100>
-            , <&key_physical_attrs 100 200 100 100>
-            , <&key_physical_attrs 200 200 100 100>
-            , <&key_physical_attrs 300 200 100 100>
-            , <&key_physical_attrs 400 200 100 100>
-            , <&key_physical_attrs 500 200 100 100>
-            , <&key_physical_attrs 600 200 100 100>
-            , <&key_physical_attrs 700 200 100 100>
-            , <&key_physical_attrs 800 200 100 100>
-            , <&key_physical_attrs 900 200 100 100>
-            , <&key_physical_attrs 1000 200 100 100>
-            , <&key_physical_attrs 1100 200 100 100>
-            , <&key_physical_attrs 1200 200 200 100> /* 2U Enter */
-
-            , <&key_physical_attrs 0 300 100 100>
-            , <&key_physical_attrs 100 300 100 100>
-            , <&key_physical_attrs 200 300 100 100>
-            , <&key_physical_attrs 300 300 100 100>
-            , <&key_physical_attrs 400 300 100 100>
-            , <&key_physical_attrs 500 300 100 100>
-            , <&key_physical_attrs 600 300 100 100>
-            , <&key_physical_attrs 700 300 100 100>
-            , <&key_physical_attrs 800 300 100 100>
-            , <&key_physical_attrs 900 300 100 100>
-            , <&key_physical_attrs 1000 300 100 100>
-            , <&key_physical_attrs 1100 300 100 100>
-            , <&key_physical_attrs 1200 300 100 100>
-            , <&key_physical_attrs 1300 300 100 100>
-
-            , <&key_physical_attrs 0 400 100 100>
-            , <&key_physical_attrs 100 400 100 100>
-            , <&key_physical_attrs 200 400 100 100>
-            , <&key_physical_attrs 400 400 200 100> /* 2U Space */
-            , <&key_physical_attrs 600 400 100 100>
-            , <&key_physical_attrs 1100 400 100 100>
-            , <&key_physical_attrs 1200 400 100 100>
-            , <&key_physical_attrs 1300 400 100 100>
-            ;
+        keys = <&key_physical_attrs 0 0 100 100>, <&key_physical_attrs 100 0 100 100>, <&key_physical_attrs 200 0 100 100>, <&key_physical_attrs 300 0 100 100>, <&key_physical_attrs 400 0 100 100>, <&key_physical_attrs 500 0 100 100>, <&key_physical_attrs 600 0 100 100>, <&key_physical_attrs 700 0 100 100>, <&key_physical_attrs 800 0 100 100>, <&key_physical_attrs 900 0 100 100>, <&key_physical_attrs 1000 0 100 100>, <&key_physical_attrs 1100 0 100 100>, <&key_physical_attrs 1200 0 100 100>, <&key_physical_attrs 1300 0 100 100>
+             , <&key_physical_attrs 0 100 100 100>, <&key_physical_attrs 100 100 100 100>, <&key_physical_attrs 200 100 100 100>, <&key_physical_attrs 300 100 100 100>, <&key_physical_attrs 400 100 100 100>, <&key_physical_attrs 500 100 100 100>, <&key_physical_attrs 600 100 100 100>, <&key_physical_attrs 700 100 100 100>, <&key_physical_attrs 800 100 100 100>, <&key_physical_attrs 900 100 100 100>, <&key_physical_attrs 1000 100 100 100>, <&key_physical_attrs 1100 100 100 100>, <&key_physical_attrs 1200 100 100 100>, <&key_physical_attrs 1300 100 100 100>
+             , <&key_physical_attrs 0 200 100 100>, <&key_physical_attrs 100 200 100 100>, <&key_physical_attrs 200 200 100 100>, <&key_physical_attrs 300 200 100 100>, <&key_physical_attrs 400 200 100 100>, <&key_physical_attrs 500 200 100 100>, <&key_physical_attrs 600 200 100 100>, <&key_physical_attrs 700 200 100 100>, <&key_physical_attrs 800 200 100 100>, <&key_physical_attrs 900 200 100 100>, <&key_physical_attrs 1000 200 100 100>, <&key_physical_attrs 1100 200 100 100>, <&key_physical_attrs 1200 200 200 100>
+             , <&key_physical_attrs 0 300 100 100>, <&key_physical_attrs 100 300 100 100>, <&key_physical_attrs 200 300 100 100>, <&key_physical_attrs 300 300 100 100>, <&key_physical_attrs 400 300 100 100>, <&key_physical_attrs 500 300 100 100>, <&key_physical_attrs 600 300 100 100>, <&key_physical_attrs 700 300 100 100>, <&key_physical_attrs 800 300 100 100>, <&key_physical_attrs 900 300 100 100>, <&key_physical_attrs 1000 300 100 100>, <&key_physical_attrs 1100 300 100 100>, <&key_physical_attrs 1200 300 100 100>, <&key_physical_attrs 1300 300 100 100>
+             , <&key_physical_attrs 0 400 100 100>, <&key_physical_attrs 100 400 100 100>, <&key_physical_attrs 200 400 100 100>, <&key_physical_attrs 400 400 200 100>, <&key_physical_attrs 600 400 100 100>, <&key_physical_attrs 1100 400 100 100>, <&key_physical_attrs 1200 400 100 100>, <&key_physical_attrs 1300 400 100 100>;
     };
 };
 
@@ -163,13 +101,14 @@ physical_layout0: physical_layout_0 {
     };
 };
 
-nice_view_spi: &spi1 {
-    compatible = "nordic,nrf-spim";
-    status = "okay";
-    pinctrl-0 = <&spi1_default>;
-    pinctrl-1 = <&spi1_sleep>;
-    pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+&soc {
+    nice_view_spi: spi@40004000 {
+        status = "okay";
+        pinctrl-0 = <&spi1_default>;
+        pinctrl-1 = <&spi1_sleep>;
+        pinctrl-names = "default", "sleep";
+        cs-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+    };
 };
 
 &spi3 {
@@ -181,7 +120,6 @@ nice_view_spi: &spi1 {
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
-        label = "WS2812";
         reg = <0>;
         spi-max-frequency = <4000000>;
         chain-length = <63>;
