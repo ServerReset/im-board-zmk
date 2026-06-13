@@ -2,6 +2,7 @@
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
 
 / {
+    /* Required binding for ZMK Studio: must be 7 cells */
     key_physical_attrs: key-physical-attrs {
         compatible = "zmk,key-physical-attrs";
         #key-cells = <7>;
@@ -98,6 +99,7 @@
     };
 };
 
+/* Explicit label definition required for shield */
 nice_view_spi: &spi1 {
     status = "okay";
     pinctrl-0 = <&spi1_default>;
