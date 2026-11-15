@@ -10,9 +10,12 @@
 
     chosen {
         zmk,kscan = &kscan0;
-        zmk,matrix-transform = &default_transform;
-        zmk,underglow = &led_strip;
+        /* With ZMK Studio on you must choose a physical layout and must NOT
+         * also choose zmk,matrix-transform: physical_layouts.c only enables
+         * layouts when the matrix-transform chosen is absent. The layout
+         * already points at &default_transform. */
         zmk,physical-layout = &physical_layout0;
+        zmk,underglow = &led_strip;
     };
 
     kscan0: kscan_0 {
@@ -82,6 +85,15 @@
         gpios = <6 GPIO_ACTIVE_HIGH>;
         output-high;
     };
+};
+
+/*
+ * Free the nRF52840 NFC pins. COL5 = P0.10 and COL6 = P0.09, which are the NFC
+ * antenna pins and are not GPIOs until this is set. Without it those two
+ * columns never scan (18 of the 63 keys).
+ */
+&uicr {
+    nfct-pins-as-gpios;
 };
 
 &pinctrl {
