@@ -1,2 +1,0 @@
-config SHIELD_IM_BOARD
-    def_bool $(shields_list_contains,im_board)

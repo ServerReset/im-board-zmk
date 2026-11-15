@@ -1,4 +1,5 @@
 #include <dt-bindings/pinctrl/nrf-pinctrl.h>
+#include <dt-bindings/led/led.h>
 
 / {
     /* Required binding for ZMK Studio: must be 7 cells */
@@ -12,12 +13,6 @@
         zmk,matrix-transform = &default_transform;
         zmk,underglow = &led_strip;
         zmk,physical-layout = &physical_layout0;
-    };
-
-    led_power: led_power {
-        compatible = "zmk,ext-power-generic";
-        control-gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
-        init-delay-ms = <50>;
     };
 
     kscan0: kscan_0 {
@@ -72,6 +67,23 @@
     };
 };
 
+/*
+ * VCC_LED rail enable.
+ * U1 pin 12 (P1.06) -> R2 10k pulldown -> Q2 gate -> Q1 gate (R1 10k to BAT+).
+ * P1.06 is low at reset, so the LED rail is dead until it is driven high.
+ * This cannot be a second zmk,ext-power-generic node: that driver is
+ * single-instance and the nice!nano already binds it to P0.13, which is the
+ * switched VCC that powers this board's display. A GPIO hog is the correct
+ * mechanism for holding a second rail on.
+ */
+&gpio1 {
+    led_power_hog: led-power-hog {
+        gpio-hog;
+        gpios = <6 GPIO_ACTIVE_HIGH>;
+        output-high;
+    };
+};
+
 &pinctrl {
     spi1_default: spi1_default {
         group1 {
@@ -119,9 +131,11 @@ nice_view_spi: &spi1 {
         compatible = "worldsemi,ws2812-spi";
         reg = <0>;
         spi-max-frequency = <4000000>;
-        chain-length = <63>;
+        /* the board carries 68 SK6812MINI-E, all in one chain L1 -> L68 */
+        chain-length = <68>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
-        color-mapping = <0 1 2>;
+        /* SK6812 takes GRB, not the <0 1 2> (white/red/green) that was here */
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
 };
